@@ -13,7 +13,8 @@ st.write(
 
 
 
-session = get_active_session()
+cnx =st.connection('snowflake')
+session = cnx.session()
 
 my_dataframe = session.table("smoothies.public.orders")
 
