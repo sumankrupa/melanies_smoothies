@@ -42,6 +42,3 @@ if ingredients_list:
             cur.execute(my_insert_stmt)
         st.success(f'Your Smoothie is ordered, {name_on_the_order}!', icon="✅")
 
-smoothiefroot_response = requests.get(f"https://my.smoothiefroot.com/api/fruit/watermelon")  
-# st.text(smoothiefroot_response.json())
-sf_df = st.dataframe(data = smoothiefroot_response.json(), use_container_width = True)
