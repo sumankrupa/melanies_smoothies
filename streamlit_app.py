@@ -29,7 +29,8 @@ if ingredients_list:
         VALUES ('{ingredients_string}', '{name_on_the_order}')
     """
 
-    time_to_insert = st.button('Submit Order')
-    if time_to_insert:
-        cnx.query(my_insert_stmt)
+    submit_button = st.button('Submit Order')
+    if submit_button:
+        with cnx.cursor() as cur:
+            cur.execute(my_insert_stmt)
         st.success(f'Your Smoothie is ordered, {name_on_the_order}!', icon="✅")
