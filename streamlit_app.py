@@ -16,7 +16,7 @@ cnx = st.connection('snowflake')
 
 # Get fruit options
 my_dataframe = cnx.query("SELECT FRUIT_NAME, SEARCH_ON FROM smoothies.public.fruit_options")
-
+st.dataframe(my_dataframe)
 # Ingredient selector
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:',
