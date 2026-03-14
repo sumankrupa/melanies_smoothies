@@ -46,7 +46,7 @@ if ingredients_list:
                 timeout=10
             )
             response.raise_for_status()
-            fruit_data = pd.DataFrame(response.json())
+            fruit_data = pd.DataFrame([response.json()])
             st.dataframe(fruit_data, use_container_width=True)
         except requests.exceptions.RequestException as e:
             st.error(f"Could not fetch nutrition info for {fruit}: {e}")
