@@ -31,15 +31,14 @@ ingredients_list = st.multiselect(
 )
 
 if ingredients_list:
-    ingredients_string = ", ".join(ingredients_list)
-
+    ingredients_string = ''
     for fruit in ingredients_list:
+        ingredients_string += fruit + ' '
+        
         search_on = my_dataframe.loc[
             my_dataframe["FRUIT_NAME"] == fruit, "SEARCH_ON"
         ].iloc[0]
-
         st.subheader(f"{fruit} Nutrition Information")
-
         try:
             response = requests.get(
                 f"https://my.smoothiefroot.com/api/fruit/{search_on}",
@@ -52,7 +51,6 @@ if ingredients_list:
             st.error(f"Could not fetch nutrition info for {fruit}: {e}")
 
     submit_button = st.button("Submit Order")
-
     if submit_button:
         if not name_on_the_order.strip():
             st.warning("Please enter a name for your smoothie order.")
