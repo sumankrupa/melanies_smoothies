@@ -16,7 +16,7 @@ cnx = st.connection('snowflake')
 
 # Get fruit options
 my_dataframe = cnx.query("SELECT FRUIT_NAME, SEARCH_ON FROM smoothies.public.fruit_options")
-st.dataframe(my_dataframe)
+st.dataframe(my_dataframe, width = True)
 # Ingredient selector
 ingredients_list = st.multiselect(
     'Choose up to 5 ingredients:',
@@ -31,8 +31,8 @@ if ingredients_list:
         search_on = my_dataframe.loc[my_dataframe['FRUIT_NAME'] == i, 'SEARCH_ON'].iloc[0]
         
         st.subheader(i + ' Nutrition Information')
-        response = requests.get(f'https://my.smoothiefroot.com/api/fruit/{search_on}')  # ✅ use search_on not i
-        st.dataframe(data=response.json(), use_container_width=True)  # ✅ don't assign to variable
+        response = requests.get(f'https://my.smoothiefroot.com/api/fruit/{search_on}') 
+        st.dataframe(data=response.json(), width=True) 
 
     my_insert_stmt = f"""
         INSERT INTO smoothies.public.orders (ingredients, name_on_order)
